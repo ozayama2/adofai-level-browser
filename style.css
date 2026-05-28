@@ -106,7 +106,6 @@ label {
 
 table {
   width: 100%;
-  table-layout: fixed;
 }
 
 td:nth-child(1) {

@@ -178,3 +178,15 @@ td:nth-child(1) button {
   padding: 2px;
   font-size: 16px;
 }
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 1%;
+  white-space: nowrap;
+}

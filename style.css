@@ -125,9 +125,13 @@ td:nth-child(2) {
 
 @media (max-width: 700px) {
 
-td:nth-child(1) {
-  width: 28px;
+td {
   padding: 4px;
+}
+
+td:nth-child(1) {
+  width: 20px;
+  padding: 2px;
 }
 
 td:nth-child(1) button {

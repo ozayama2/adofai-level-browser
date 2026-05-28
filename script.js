@@ -91,10 +91,15 @@ function render(data) {
     </span><br>
 
     ${
-      level.youtube_url
-        ? `<button onclick="playVideo('${level.youtube_url}')">▶ YouTube</button>`
-        : ""
-    }
+  level.youtube_url
+    ? `
+      <button onclick="playVideo('${level.youtube_url}', ${index})">
+        ▶ YouTube
+      </button>
+      <div id="player-${index}"></div>
+    `
+    : ""
+}
 
     ${
       getWorkshopUrl(level) &&
@@ -116,16 +121,25 @@ function render(data) {
   }
 }
 
-function playVideo(url) {
-  const id = getVideoId(url);
-  if (!id) return;
+function playVideo(url, index) {
 
-  document.getElementById("player").innerHTML = `
+  const container = document.getElementById(`player-${index}`);
+
+  if (container.innerHTML !== "") {
+    container.innerHTML = "";
+    return;
+  }
+
+  const videoId = extractYouTubeId(url);
+
+  container.innerHTML = `
     <iframe
-      src="https://www.youtube.com/embed/${id}"
+      width="200"
+      height="113"
+      src="https://www.youtube.com/embed/${videoId}"
       frameborder="0"
-      allowfullscreen
-    ></iframe>
+      allowfullscreen>
+    </iframe>
   `;
 }
 

@@ -77,33 +77,40 @@ function render(data) {
     const tr = document.createElement("tr");
 
     tr.innerHTML = `
-      <td>
-       <button onclick="toggleFavorite(${index})">
-        ${isFavorite(level) ? "★" : "☆"}
-       </button>
-      </td>
-      <td>${level.title || ""}</td>
-      <td>${level.artist || ""}</td>
-      <td>${level.difficulty || ""}</td>
-      <td>
-         ${level.youtube_url
-           ? `<button onclick="playVideo('${level.youtube_url}')">再生</button>`
-           : `<span style="color:#666">なし</span>`
-        }
-      </td>
-      
-      <td>
-  ${
-    getWorkshopUrl(level) &&
-    getWorkshopUrl(level).startsWith("http")
-      ? `<a href="${getWorkshopUrl(level)}" target="_blank">Workshop</a>`
-      : level.download_url &&
-        level.download_url.startsWith("http")
-          ? `<a href="${level.download_url}" target="_blank">Download</a>`
-          : `<span style="color:#666">なし</span>`
-  }
-</td>
-    `;
+  <td>
+    <button onclick="toggleFavorite(${index})">
+      ${isFavorite(level) ? "★" : "☆"}
+    </button>
+  </td>
+
+  <td>
+    <strong>${level.title}</strong><br>
+
+    <span style="color:#888;">
+      ${level.artist || ""}
+    </span><br>
+
+    ${
+      level.youtube_url
+        ? `<button onclick="playVideo('${level.youtube_url}')">▶ YouTube</button>`
+        : ""
+    }
+
+    ${
+      getWorkshopUrl(level) &&
+      getWorkshopUrl(level).startsWith("http")
+        ? `<a href="${getWorkshopUrl(level)}" target="_blank"> Workshop</a>`
+        : level.download_url &&
+          level.download_url.startsWith("http")
+            ? `<a href="${level.download_url}" target="_blank"> Download</a>`
+            : ""
+    }
+  </td>
+
+  <td>
+    ${level.difficulty || ""}
+  </td>
+`;
 
     tbody.appendChild(tr);
   }

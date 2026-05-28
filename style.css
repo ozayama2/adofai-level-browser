@@ -99,3 +99,7 @@ label {
 
   margin-bottom: 20px;
 }
+
+.table-container {
+  overflow-x: auto;
+}

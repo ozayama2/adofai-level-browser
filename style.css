@@ -137,3 +137,22 @@ td:nth-child(2) {
   }
 
 }
+
+@media (max-width: 700px) {
+
+  iframe {
+    width: 120px;
+    height: 68px;
+  }
+
+  td {
+    font-size: 14px;
+    vertical-align: top;
+  }
+
+  td:nth-child(3) {
+    width: 50px;
+    white-space: nowrap;
+  }
+
+}

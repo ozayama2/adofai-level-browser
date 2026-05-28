@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ADOFAI Levels</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>ADOFAI Levels Browser</h1>
+
+    <input
+      type="text"
+      id="search"
+      placeholder="曲名・アーティスト検索"
+    >
+  <select id="sort">
+
+  <option value="difficulty_desc">
+    難易度 ↓
+  </option>
+
+  <option value="difficulty_asc">
+    難易度 ↑
+  </option>
+
+  <option value="tiles_desc">
+    タイル数 ↓
+  </option>
+
+  <option value="tiles_asc">
+    タイル数 ↑
+  </option>
+
+  <option value="title_asc">
+    曲名 A-Z
+  </option>
+
+</select>
+
+<label>
+  <input type="checkbox" id="favorites-only">
+  Favorites only
+</label>    
+
+<div id="count"></div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Fav</th>
+          <th>Title</th>
+          <th>Artist</th>
+          <th>Difficulty</th>
+          <th>YouTube</th>
+          <th>Workshop</th>
+        </tr>
+      </thead>
+
+      <tbody id="table-body"></tbody>
+
+    </table>
+　　
+　　<div id="player"></div>
+  　
+　　</div>
+
+  　<script src="script.js"></script>
+
+</body>
+</html>

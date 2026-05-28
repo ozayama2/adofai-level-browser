@@ -1,0 +1,9 @@
+::1 - - [25/May/2026 10:42:04] "GET / HTTP/1.1" 304 -
+::1 - - [25/May/2026 10:42:04] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/May/2026 10:42:04] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/May/2026 10:42:04] "GET /adofai_levels.csv HTTP/1.1" 304 -
+::1 - - [25/May/2026 10:42:04] code 404, message File not found
+::1 - - [25/May/2026 10:42:04] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [25/May/2026 10:42:04] "GET / HTTP/1.1" 304 -
+::1 - - [25/May/2026 10:42:18] code 404, message File not found
+::1 - - [25/May/2026 10:42:18] "GET /favicon.ico HTTP/1.1" 404 -

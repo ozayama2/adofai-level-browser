@@ -108,36 +108,29 @@ function render(data) {
       <button onclick="playVideo('${level.youtube_url}', ${index})">
         ▶ YouTube
       </button>
+
+      <div id="player-${index}" class="video-container"></div>
     `
     : ""
 }
 
-    ${
-      getWorkshopUrl(level) &&
-      getWorkshopUrl(level).startsWith("http")
-        ? `<a href="${getWorkshopUrl(level)}" target="_blank"> Workshop</a>`
-        : level.download_url &&
-          level.download_url.startsWith("http")
-            ? `<a href="${level.download_url}" target="_blank"> Download</a>`
-            : ""
-    }
-  </td>
+${
+  getWorkshopUrl(level) &&
+  getWorkshopUrl(level).startsWith("http")
+    ? `<a href="${getWorkshopUrl(level)}" target="_blank"> Workshop</a>`
+    : level.download_url &&
+      level.download_url.startsWith("http")
+        ? `<a href="${level.download_url}" target="_blank"> Download</a>`
+        : ""
+}
+</td>
 
-  <td>
-    ${level.difficulty || ""}
-  </td>
+<td>
+  ${level.difficulty || ""}
+</td>
 `;
 
     tbody.appendChild(tr);
-const videoRow = document.createElement("tr");
-
-videoRow.innerHTML = `
-  <td colspan="3">
-    <div id="player-${index}" class="video-container"></div>
-  </td>
-`;
-
-tbody.appendChild(videoRow);
   }
 }
 

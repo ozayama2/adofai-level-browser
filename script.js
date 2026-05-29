@@ -2,7 +2,8 @@ let levels = [];
 let filteredLevels = [];
 let favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
-
+let minDifficulty = 1;
+let maxDifficulty = 25;
 function getWorkshopUrl(level) {
   return level.workshop || level.workshop_url || "";
 }
@@ -23,6 +24,33 @@ Papa.parse("adofai_levels.csv", {
     document
       .getElementById("sort")
       .addEventListener("change", search);
+
+    const slider = document.getElementById("difficulty-slider");
+
+noUiSlider.create(slider, {
+  start: [1, 25],
+  connect: true,
+  step: 1,
+  range: {
+    min: 1,
+    max: 25
+  }
+});
+
+slider.noUiSlider.on("update", (values) => {
+
+  minDifficulty = Number(values[0]);
+  maxDifficulty = Number(values[1]);
+
+  document.getElementById("minDiff").textContent =
+    minDifficulty;
+
+  document.getElementById("maxDiff").textContent =
+    maxDifficulty;
+
+  search();
+});
+
   }
 });
 
@@ -49,7 +77,18 @@ function search() {
       !favoritesOnly ||
       favorites.includes(getLevelId(level));
 
-    return matchesSearch && matchesFavorite;
+    const difficulty =
+  Number(level.difficulty || 0);
+
+const matchesDifficulty =
+  difficulty >= minDifficulty &&
+  difficulty <= maxDifficulty;
+
+return (
+  matchesSearch &&
+  matchesFavorite &&
+  matchesDifficulty
+);
   });
 
   filtered.sort((a, b) => {
@@ -184,3 +223,8 @@ function toggleFavorite(index) {
 document
   .getElementById("favorites-only")
   .addEventListener("change", search);
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("sort").value = "difficulty_asc";
+  search();
+});

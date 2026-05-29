@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
 </head>
 
 <body>
@@ -22,6 +26,17 @@
       id="search"
       placeholder="曲名・アーティスト検索"
     >
+
+<div class="difficulty-filter">
+  <div id="difficulty-slider"></div>
+
+  <div id="difficulty-values">
+    Lv.<span id="minDiff">1</span>
+    -
+    Lv.<span id="maxDiff">25</span>
+  </div>
+</div>
+
   <select id="sort">
 
   <option value="difficulty_desc">

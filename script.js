@@ -1,16 +1,4 @@
-  display: none;
-  margin-top: 6px;
-}
-
-.video-container.active {
-  display: block;
-}  display: none;
-  margin-top: 6px;
-}
-
-.video-container.active {
-  display: block;
-}let levels = [];
+let levels = [];
 let filteredLevels = [];
 let favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -103,15 +91,10 @@ function render(data) {
     </span><br>
 
     ${
-  level.youtube_url
-    ? `
-      <button onclick="playVideo('${level.youtube_url}', ${index})">
-        ▶ YouTube
-      </button>
-      <div id="player-${index}" class="video-container"></div>
-    `
-    : ""
-}
+      level.youtube_url
+        ? `<button onclick="playVideo('${level.youtube_url}')">▶ YouTube</button>`
+        : ""
+    }
 
     ${
       getWorkshopUrl(level) &&
@@ -133,33 +116,33 @@ function render(data) {
   }
 }
 
-function playVideo(url, index) {
+function playVideo(url) {
+  const id = getVideoId(url);
+  if (!id) return;
 
-  const container = document.getElementById(`player-${index}`);
-
-  if (container.innerHTML !== "") {
-    container.innerHTML = "";
-container.classList.remove("active");
-return;
-  }
-
-container.classList.add("active");
-
-  const videoId = extractYouTubeId(url);
-  
-if (!videoId) return;
-
-  container.innerHTML = `
+  document.getElementById("player").innerHTML = `
     <iframe
-      width="200"
-      height="113"
-      src="https://www.youtube.com/embed/${videoId}"
+      src="https://www.youtube.com/embed/${id}"
       frameborder="0"
-      allowfullscreen>
-    </iframe>
+      allowfullscreen
+    ></iframe>
   `;
 }
 
+function getVideoId(url) {
+  if (!url) return "";
+
+  let match = url.match(/youtu\.be\/([^?]+)/);
+  if (match) return match[1];
+
+  match = url.match(/[?&]v=([^&]+)/);
+  if (match) return match[1];
+
+  match = url.match(/embed\/([^?]+)/);
+  if (match) return match[1];
+
+  return "";
+}
 
 function getLevelId(level) {
 
@@ -201,15 +184,3 @@ function toggleFavorite(index) {
 document
   .getElementById("favorites-only")
   .addEventListener("change", search);
-
-function extractYouTubeId(url) {
-
-  const regExp =
-    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-
-  const match = url.match(regExp);
-
-  return match && match[2].length === 11
-    ? match[2]
-    : null;
-}

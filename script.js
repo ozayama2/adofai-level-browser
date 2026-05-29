@@ -145,20 +145,6 @@ if (!videoId) return;
   `;
 }
 
-function getVideoId(url) {
-  if (!url) return "";
-
-  let match = url.match(/youtu\.be\/([^?]+)/);
-  if (match) return match[1];
-
-  match = url.match(/[?&]v=([^&]+)/);
-  if (match) return match[1];
-
-  match = url.match(/embed\/([^?]+)/);
-  if (match) return match[1];
-
-  return "";
-}
 
 function getLevelId(level) {
 

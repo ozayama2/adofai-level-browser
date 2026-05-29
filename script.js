@@ -131,6 +131,8 @@ function playVideo(url, index) {
   }
 
   const videoId = extractYouTubeId(url);
+  
+if (!videoId) return;
 
   container.innerHTML = `
     <iframe
@@ -198,3 +200,15 @@ function toggleFavorite(index) {
 document
   .getElementById("favorites-only")
   .addEventListener("change", search);
+
+function extractYouTubeId(url) {
+
+  const regExp =
+    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+
+  const match = url.match(regExp);
+
+  return match && match[2].length === 11
+    ? match[2]
+    : null;
+}

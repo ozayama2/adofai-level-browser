@@ -1,4 +1,16 @@
-let levels = [];
+  display: none;
+  margin-top: 6px;
+}
+
+.video-container.active {
+  display: block;
+}  display: none;
+  margin-top: 6px;
+}
+
+.video-container.active {
+  display: block;
+}let levels = [];
 let filteredLevels = [];
 let favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -127,8 +139,11 @@ function playVideo(url, index) {
 
   if (container.innerHTML !== "") {
     container.innerHTML = "";
-    return;
+container.classList.remove("active");
+return;
   }
+
+container.classList.add("active");
 
   const videoId = extractYouTubeId(url);
   

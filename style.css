@@ -167,12 +167,7 @@ td:nth-child(3) {
 }
 
 .video-container {
-  display: none;
   margin-top: 6px;
-}
-
-.video-container.active {
-  display: block;
 }
 
 .video-container:empty {

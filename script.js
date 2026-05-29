@@ -96,7 +96,7 @@ function render(data) {
       <button onclick="playVideo('${level.youtube_url}', ${index})">
         ▶ YouTube
       </button>
-      <div id="player-${index}"></div>
+      <div id="player-${index}" class="video-container"></div>
     `
     : ""
 }

@@ -190,3 +190,19 @@ td:nth-child(3) {
   width: 1%;
   white-space: nowrap;
 }
+
+.video-container {
+  margin-top: 6px;
+}
+
+.video-container:empty {
+  display: none;
+}
+
+.video-container iframe {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 8px;
+}

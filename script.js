@@ -134,6 +134,13 @@ function render(data) {
   ${level.creator || "Unknown"}
   ${Number(level.max_bpm) > 0 ? ` • ${level.max_bpm} BPM` : ""}
   • ${level.tile_count || "?"} Tiles
+
+${
+  level.tags
+    ? `<br><span class="desktop-tags">${level.tags.replaceAll(", ", " • ")}</span>`
+    : ""
+}
+
 </span>
 
 <br>

@@ -131,9 +131,9 @@ function render(data) {
 
 <span class="desktop-meta">
   <br>
-  ${level.creator || "Unknown"} •
-  ${level.max_bpm || "?"} BPM •
-  ${level.tile_count || "?"} Tiles
+  ${level.creator || "Unknown"}
+  ${Number(level.max_bpm) > 0 ? ` • ${level.max_bpm} BPM` : ""}
+  • ${level.tile_count || "?"} Tiles
 </span>
 
 <br>

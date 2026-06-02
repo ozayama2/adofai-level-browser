@@ -1,4 +1,4 @@
-let levels = [];
+	let levels = [];
 let filteredLevels = [];
 let favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -126,8 +126,17 @@ function render(data) {
     <strong>${level.title}</strong><br>
 
     <span style="color:#888;">
-      ${level.artist || ""}
-    </span><br>
+  ${level.artist || ""}
+</span>
+
+<span class="desktop-meta">
+  <br>
+  ${level.creator || "Unknown"} •
+  ${level.max_bpm || "?"} BPM •
+  ${level.tile_count || "?"} Tiles
+</span>
+
+<br>
 
     ${
       level.youtube_url

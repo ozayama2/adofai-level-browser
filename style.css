@@ -141,3 +141,15 @@ label {
     margin: 0 auto;
   }
 }
+
+.desktop-meta {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .desktop-meta {
+    display: inline;
+    color: #666;
+    font-size: 12px;
+  }
+}

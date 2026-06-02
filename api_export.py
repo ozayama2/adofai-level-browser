@@ -68,6 +68,14 @@ while True:
 
     "creator": ", ".join(creators),
 
+    "max_bpm": level.get("maxBpm", ""),
+
+    "min_bpm": level.get("minBpm", ""),
+
+    "quality": level.get("quality", ""),
+
+    "epilepsy_warning": level.get("epilepsyWarning", False),
+
     "tags": ", ".join(
         tag.get("name", "")
         for tag in level.get("tags", [])
@@ -91,7 +99,7 @@ with open(
 
     writer = csv.DictWriter(
         f,
-        fieldnames=[
+        fieldnames = [
     "title",
     "artist",
     "difficulty",
@@ -100,6 +108,10 @@ with open(
     "download_url",
     "tile_count",
     "creator",
+    "max_bpm",
+    "min_bpm",
+    "quality",
+    "epilepsy_warning",
     "tags"
 ]
     )

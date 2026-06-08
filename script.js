@@ -114,6 +114,7 @@ function render(data) {
   for (const [index, level] of data.entries()) {
 
     const tr = document.createElement("tr");
+    tr.id = `row-${index}`;
 
     tr.innerHTML = `
   <td>
@@ -281,3 +282,42 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("sort").value = "difficulty_asc";
   search();
 });
+
+document
+  .getElementById("random-btn")
+  .addEventListener("click", randomLevel);
+
+function randomLevel() {
+
+  if (!currentLevels.length) return;
+
+  const index =
+    Math.floor(Math.random() * currentLevels.length);
+
+  const row =
+    document.getElementById(`row-${index}`);
+
+  if (!row) return;
+
+  document
+    .querySelectorAll(".random-highlight")
+    .forEach(el =>
+      el.classList.remove("random-highlight")
+    );
+
+  row.classList.add("random-highlight");
+
+  row.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+document
+  .getElementById("top-btn")
+  .addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });

@@ -188,3 +188,21 @@ label {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.random-highlight {
+  outline: 3px solid gold;
+  animation: randomFlash 1.2s ease-in-out 3;
+}
+
+@keyframes randomFlash {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+#top-btn {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}

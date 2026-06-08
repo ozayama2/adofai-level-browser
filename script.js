@@ -96,6 +96,8 @@ return (
     if (sort === "difficulty_asc") return (a.difficulty || 0) - (b.difficulty || 0);
     if (sort === "tiles_desc") return (b.tile_count || 0) - (a.tile_count || 0);
     if (sort === "tiles_asc") return (a.tile_count || 0) - (b.tile_count || 0);
+    if (sort === "tiles_desc") return (b.tile_count || 0) - (a.tile_count || 0);
+    if (sort === "tiles_asc") return (a.tile_count || 0) - (b.tile_count || 0);
     if (sort === "title_asc") return (a.title || "").localeCompare(b.title || "");
     return 0;
   });
@@ -280,6 +282,8 @@ document
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("sort").value = "difficulty_asc";
+    if (sort === "tiles_desc") return (b.tile_count || 0) - (a.tile_count || 0);
+    if (sort === "tiles_asc") return (a.tile_count || 0) - (b.tile_count || 0);
   search();
 });
 

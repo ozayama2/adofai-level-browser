@@ -69,7 +69,7 @@ function search() {
     .value;
 
   let filtered = levels.filter(level => {
-    const text = ((level.title || "") + " " + (level.artist || "")).toLowerCase();
+const text = ((level.title || "") + " " + (level.artist || "") + " " + (level.creator || "")).toLowerCase();
     const matchesSearch =
     text.includes(keyword);
 
@@ -122,44 +122,65 @@ function render(data) {
     </button>
   </td>
 
-  <td>
-    <strong>${level.title}</strong><br>
+    <td>
+    <div class="level-info">
 
-    <span style="color:#888;">
-  ${level.artist || ""}
-</span>
+      ${
+        level.youtube_url
+					          ? `<img
+               class="thumbnail"
+               src="${getThumbnail(level.youtube_url)}"
+               alt="">`
+          : ""
+      }
 
-<span class="desktop-meta">
-  <br>
-  ${level.creator || "Unknown"}
-  ${Number(level.max_bpm) > 0 ? ` • ${level.max_bpm} BPM` : ""}
-  • ${level.tile_count || "?"} Tiles
+      <div class="level-text">
 
-${
-  level.tags
-    ? `<br><span class="desktop-tags">${level.tags.replaceAll(", ", " • ")}</span>`
-    : ""
-}
+        <strong>${level.title}</strong><br>
 
-</span>
+        <span style="color:#888;">
+          ${level.artist || ""}
+        </span>
 
-<br>
+        <span class="desktop-meta">
+          <br>
+          <a
+            class="creator-link"
+            href="#"
+            onclick="searchCreator('${level.creator || ""}'); return false;"
+          >
+            ${level.creator || "Unknown"}
+          </a>
+          ${Number(level.max_bpm) > 0 ? ` • ${level.max_bpm} BPM` : ""}
+          • ${level.tile_count || "?"} Tiles
+        </span>
 
-    ${
-      level.youtube_url
-        ? `<button onclick="playVideo('${level.youtube_url}')">▶ YouTube</button>`
-        : ""
-    }
-
-    ${
-      getWorkshopUrl(level) &&
-      getWorkshopUrl(level).startsWith("http")
-        ? `<a href="${getWorkshopUrl(level)}" target="_blank"> Workshop</a>`
-        : level.download_url &&
-          level.download_url.startsWith("http")
-            ? `<a href="${level.download_url}" target="_blank"> Download</a>`
+        ${
+          level.tags
+            ? `<br><span class="desktop-tags">${level.tags.replaceAll(", ", " • ")}</span>`
             : ""
-    }
+        }
+
+        <br>
+
+        ${
+          level.youtube_url
+            ? `<button onclick="playVideo('${level.youtube_url}')">▶ YouTube</button>`
+            : ""
+        }
+
+        ${
+          getWorkshopUrl(level) &&
+          getWorkshopUrl(level).startsWith("http")
+            ? `<a href="${getWorkshopUrl(level)}" target="_blank"> Workshop</a>`
+            : level.download_url &&
+              level.download_url.startsWith("http")
+                ? `<a href="${level.download_url}" target="_blank"> Download</a>`
+                : ""
+        }
+
+      </div>
+    </div>
   </td>
 
   <td>
@@ -199,6 +220,14 @@ function getVideoId(url) {
   return "";
 }
 
+function getThumbnail(url) {
+  const id = getVideoId(url);
+
+  return id
+    ? `https://img.youtube.com/vi/${id}/mqdefault.jpg`
+    : "";
+}
+
 function getLevelId(level) {
 
   return [
@@ -214,6 +243,14 @@ function getLevelId(level) {
 
 function isFavorite(level) {
   return favorites.includes(getLevelId(level));
+}
+
+function searchCreator(creator) {
+  const searchBox = document.getElementById("search");
+  searchBox.value = creator;
+  search();
+  searchBox.focus();
+  searchBox.select();
 }
 
 function toggleFavorite(index) {

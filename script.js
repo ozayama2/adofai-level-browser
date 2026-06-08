@@ -96,8 +96,25 @@ return (
     if (sort === "difficulty_asc") return (a.difficulty || 0) - (b.difficulty || 0);
     if (sort === "tiles_desc") return (b.tile_count || 0) - (a.tile_count || 0);
     if (sort === "tiles_asc") return (a.tile_count || 0) - (b.tile_count || 0);
-    if (sort === "tiles_desc") return (b.tile_count || 0) - (a.tile_count || 0);
-    if (sort === "tiles_asc") return (a.tile_count || 0) - (b.tile_count || 0);
+    if (sort === "bpm_desc") {
+      const aBpm = Number(a.max_bpm);
+      const bBpm = Number(b.max_bpm);
+
+      if (!aBpm) return 1;
+      if (!bBpm) return -1;
+
+      return bBpm - aBpm;
+    }
+
+    if (sort === "bpm_asc") {
+      const aBpm = Number(a.max_bpm);
+      const bBpm = Number(b.max_bpm);
+
+      if (!aBpm) return 1;
+      if (!bBpm) return -1;
+
+      return aBpm - bBpm;
+    }
     if (sort === "title_asc") return (a.title || "").localeCompare(b.title || "");
     return 0;
   });
@@ -284,6 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("sort").value = "difficulty_asc";
     if (sort === "tiles_desc") return (b.tile_count || 0) - (a.tile_count || 0);
     if (sort === "tiles_asc") return (a.tile_count || 0) - (b.tile_count || 0);
+    if (sort === "bpm_desc") return (b.max_bpm || 0) - (a.max_bpm || 0);
+    if (sort === "bpm_asc") return (a.max_bpm || 0) - (b.max_bpm || 0);
   search();
 });
 

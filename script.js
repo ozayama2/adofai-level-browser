@@ -1,5 +1,6 @@
 	let levels = [];
 let filteredLevels = [];
+let topCreators = [];
 let favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
 let minDifficulty = 1;
@@ -14,6 +15,22 @@ Papa.parse("adofai_levels.csv", {
 
   complete: function(results) {
     levels = results.data;
+
+    const creatorCounts = {};
+
+    levels.forEach(level => {
+      const creator = level.creator?.trim();
+
+      if (!creator) return;
+
+      creatorCounts[creator] = (creatorCounts[creator] || 0) + 1;
+    });
+
+    topCreators = Object.entries(creatorCounts)
+      .sort((a, b) => b[1] - a[1]);
+
+    console.table(topCreators);
+
 
     search();
 
@@ -344,3 +361,5 @@ document
       behavior: "smooth"
     });
   });
+
+
